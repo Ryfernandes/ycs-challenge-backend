@@ -1,6 +1,3 @@
-const dns = require('dns');
-dns.setDefaultResultOrder('ipv4first');
-
 const express = require('express');
 const { createServer } = require ('http');
 const { Server } = require('socket.io');
@@ -22,13 +19,10 @@ const io = new Server(httpServer, {
   }
 });
 
+
 // PostgreSQL connection
 const pool = new Pool({
-  user: 'postgres',
-  host: 'db.bijhyuswpprmdocdutfm.supabase.co',
-  database: 'postgres',
-  password: process.env.POSTGRES_PASSWORD,
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false // Look into this later
   }
